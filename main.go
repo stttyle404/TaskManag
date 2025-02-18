@@ -1,9 +1,8 @@
 package main
 
 import (
-	"log"
+	"TaskManager/Logging"
 	"net"
-	"os"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -19,25 +18,6 @@ type Task struct {
 	status      string
 }
 
-func Log(Message any) {
-	file, err := os.OpenFile("Err.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatal("FileReading Err - ", err, " - ", time.Now())
-	}
-	defer file.Close()
-
-	log.SetOutput(file)
-
-	switch v := Message.(type) {
-	case string:
-		log.Println(v, " - ", time.Now())
-	case error:
-		log.Println(v, " - ", time.Now())
-	default:
-		log.Println(" Error type logging ", time.Now())
-	}
-}
-
 func (t Task) AddTask(Title string, Description string, Overdate string, Status string) {
 	request := ""
 	request = Title + " " + Description + " " + Overdate + " " + Status
@@ -46,12 +26,12 @@ func (t Task) AddTask(Title string, Description string, Overdate string, Status 
 	defer Conn.Close()
 
 	if err != nil {
-		Log(err)
+		Logging.Logging(err)
 	}
 	if _, err := Conn.Write([]byte(request)); err != nil {
-		Log(err)
+		Logging.Logging(err)
 	} else {
-		Log("Adding Task Succesfuly")
+		Logging.Logging("Adding Task Succesfuly")
 	}
 }
 
