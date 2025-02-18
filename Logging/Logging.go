@@ -17,10 +17,10 @@ func Logging(Message any) {
 
 	switch v := Message.(type) {
 	case string:
-		log.Println(v, " - ", time.Now())
+		log.Println(v)
 	case error:
-		log.Println(v, " - ", time.Now())
+		log.Println(v)
 	default:
-		log.Println(v, " - ", time.Now())
+		log.Println(v)
 	}
 }

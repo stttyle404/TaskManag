@@ -20,7 +20,7 @@ type Task struct {
 
 func (t Task) AddTask(Title string, Description string, Overdate string, Status string) {
 	request := ""
-	request = Title + " " + Description + " " + Overdate + " " + Status
+	request = "AT" + " " + Title + " " + Description + " " + Overdate + " " + Status
 	Conn, err := net.Dial("tcp", "localhost:8080")
 
 	defer Conn.Close()

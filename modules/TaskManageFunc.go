@@ -1,4 +1,4 @@
-package AddTask
+package modules
 
 import (
 	"TaskManager/Logging"
